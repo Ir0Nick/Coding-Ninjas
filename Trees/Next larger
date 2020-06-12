@@ -1,0 +1,37 @@
+
+int  diff(TreeNode<int> * root, int n)
+{
+    int d = root->data-n;
+    if(d>0)
+        return d;
+    else return 0;
+}
+
+
+
+
+TreeNode<int>* nextLargerElement(TreeNode<int> *root, int n) {
+		
+	if(root == NULL)
+		  return NULL;
+  
+    TreeNode<int> * ptr = NULL;
+    if (root->data-n>0)
+        ptr = root;
+    
+    for(int i =0 ; i< root->children.size(); i++)
+    {	 TreeNode<int> * chilmax =nextLargerElement(root->children.at(i),n);
+        if(ptr==NULL)
+        {
+                ptr = chilmax;
+        }
+        else
+        {       if(chilmax!=NULL)
+            	if(diff(ptr,n)>diff(chilmax,n))
+                    ptr = chilmax;
+        }
+    }
+    return ptr;
+
+}
+
